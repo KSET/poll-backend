@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use App\Poll;
-use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -14,9 +13,19 @@ use App\Http\Requests;
 class PollsController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return Poll::all()->toJson();
+        $polls = DB::table('polls')->whereBetween('created_at',
+            array($request->get("start_date") != null ? $request->get("start_date") : '1970-1-1 00:00:00',
+                $request->get("end_date") != null ? $request->get("end_date") : '2999-1-1 00:00:00'))->get();
+
+        $answers = Answer::all();
+
+        foreach ($polls as $poll){
+            $poll->answers = array_slice($answers->where('poll_id', $poll->id)->toArray(), 0);
+        }
+
+        return $polls;
     }
 
     public function getFromPeriod(Request $request)
@@ -84,5 +93,13 @@ class PollsController extends Controller
         }
 
         return ["message" => "Poll deleted"];
+    }
+
+    public function getByScheduel(){
+
+        $schedule = [
+
+        ];
+
     }
 }

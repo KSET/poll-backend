@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Answer;
+use App\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 use App\Http\Requests;
@@ -15,9 +16,31 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Answer::all()->toJson();
+        $answers = DB::table('answers')->whereBetween('created_at',
+            array($request->get("start_date") != null ? $request->get("start_date") : '1970-1-1 00:00:00',
+                $request->get("end_date") != null ? $request->get("end_date") : '2999-1-1 00:00:00'));
+
+        $question_id = intval($request->get("question_id"));
+        if ($question_id){
+            $answers = $answers->where('question_id', $question_id);
+        }
+
+        $poll_id = intval($request->get("poll_id"));
+        if ($poll_id){
+            $answers = $answers->where('poll_id', $poll_id);
+        }
+
+        $questions = Question::all();
+
+        $answers = $answers->get();
+        foreach ($answers as $value){
+            $value->question = $questions->where('id', $value->question_id);
+            unset($value->question_id);
+        }
+
+        return $answers;
     }
 
     /**
