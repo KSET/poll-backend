@@ -59,7 +59,7 @@ class PollsController extends Controller
 
         $poll = new Poll;
 
-        foreach (Question::all() as $question){
+        foreach (App\Question::all() as $question){
             if(!array_key_exists($question->id, $request->answers)){
                 return response()->json(["message" => "Answer for question with id {$question->id} not given"], 400);
             }
@@ -67,7 +67,7 @@ class PollsController extends Controller
         
         $poll->save();
 
-        foreach (Question::all() as $question){
+        foreach (App\Question::all() as $question){
             $score = $request->answers[$question->id];
 
             $answer = new Answer;
