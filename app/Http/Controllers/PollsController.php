@@ -153,7 +153,7 @@ class PollsController extends Controller
                 DB::raw('SELECT AVG(score) as avg_score, question_id, text as question_text
                     FROM answers JOIN questions ON
                         answers.question_id = questions.id
-                    WHERE created_at >= "' .$value. '" AND created_at < "' .$end_val->format('Y-m-d H:i:s'). '"
+                    WHERE answers.created_at >= "' .$value. '" AND answers.created_at < "' .$end_val->format('Y-m-d H:i:s'). '"
                     GROUP BY question_id, text'));
         
             $retVal = [
