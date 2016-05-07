@@ -148,7 +148,7 @@ class PollsController extends Controller
         
         foreach($schedule as $key => $value){
             $end_val = Carbon::createFromFormat('Y-m-d H:i:s', $value);
-          //  $end_val->add(new DateInterval('PT30M'));
+            $end_val->addMinutes(30);
             
             $retVal = [
                 "start" => $value,
