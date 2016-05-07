@@ -37,7 +37,6 @@ class AnswerController extends Controller
         $answers = $answers->get();
         foreach ($answers as $value){
             $value->question = $questions->where('id', $value->question_id);
-            unset($value->question_id);
         }
 
         return $answers;
