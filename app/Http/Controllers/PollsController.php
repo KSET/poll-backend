@@ -8,8 +8,8 @@ use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
-use DateTime;
 use DateInterval;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 
@@ -147,7 +147,7 @@ class PollsController extends Controller
         $returnJson = null;
         
         foreach($schedule as $key => $value){
-            $end_val = DateTime::createFromFormat('Y-m-d h:m:s', $value);
+            $end_val = Carbon::createFromFormat('Y-m-d h:m:s', $value);
           //  $end_val->add(new DateInterval('PT30M'));
             
             $retVal = [
