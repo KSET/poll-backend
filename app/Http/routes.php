@@ -6,4 +6,4 @@ Route::resource('answers', 'AnswerController');
 Route::post('polls_period', 'PollsController@getFromPeriod');
 Route::resource('polls', 'PollsController');
 
-Route::get('schedule', 'PollsController@getByScheduel')
+Route::get('schedule', 'PollsController@getByScheduel');
