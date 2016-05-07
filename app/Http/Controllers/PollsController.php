@@ -105,7 +105,7 @@ class PollsController extends Controller
             "CS Computer Systems" => "2016-5-9 9:00:00",
             "Montelektro" => "2016-5-9 9:30:00",
             "Rimac" => "2016-5-9 10:00:00",
-            "Rimac" => "2016-5-9 10:30:00",
+            "Rimac #2" => "2016-5-9 10:30:00",
             "CetiTec" => "2016-5-9 11:00:00",
             "Mikroprojekt" => "2016-5-9 11:30:00",
             "Farmeron" => "2016-5-9 12:00:00",
@@ -148,7 +148,7 @@ class PollsController extends Controller
         
         foreach($schedule as $key => $value){
             $end_val = new DateTime($value);
-            $end_val->add(new DateInterval('PT30M'));
+          //  $end_val->add(new DateInterval('PT30M'));
             
             $retVal = [
                 "start" => $value,
