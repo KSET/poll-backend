@@ -143,16 +143,21 @@ class PollsController extends Controller
             "Degordian" => "2016-5-10 18:00:00",
         ];
         
-        $answers = Answer::all();
         $returnJson = null;
         
         foreach($schedule as $key => $value){
             $end_val = Carbon::createFromFormat('Y-m-d H:i:s', $value);
             $end_val->addMinutes(30);
             
+             $answers = DB::raw('SELECT AVG(score), question_id
+                FROM answers
+                WHERE created_at >= ' .$value. ' AND created_at < ' .$end_val->format('Y-m-d H:i:s'). '
+                GROUP BY question_id');
+        
             $retVal = [
                 "start" => $value,
-                "end" => $end_val->format('Y-m-d H:i:s')
+                "end" => $end_val->format('Y-m-d H:i:s'),
+                "answers" => $answers
                 ];
             
             $returnJson[$key] = $retVal;
