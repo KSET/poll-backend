@@ -105,8 +105,8 @@ class PollsController extends Controller
             "CS Computer Systems" => "2016-5-7 17:00:00",
             "Montelektro" => "2016-5-7 17:30:00",
             "Rimac" => "2016-5-7 18:00:00",
-            "Rimac #2" => "2016-5-9 10:30:00",
-            "CetiTec" => "2016-5-9 11:00:00",
+            "Rimac #2" => "2016-5-7 18:30:00",
+            "CetiTec" => "2016-5-7 19:00:00",
             "Mikroprojekt" => "2016-5-9 11:30:00",
             "Farmeron" => "2016-5-9 12:00:00",
             "Five" => "2016-5-9 12:30:00",
@@ -150,10 +150,11 @@ class PollsController extends Controller
             $end_val->addMinutes(30);
             
              $answers = DB::select(
-                DB::raw('SELECT AVG(score), question_id
-                    FROM answers
+                DB::raw('SELECT AVG(score) as avg_score, question_id, text as question_text
+                    FROM answers JOIN questions ON
+                        answers.question_id = questions.id
                     WHERE created_at >= "' .$value. '" AND created_at < "' .$end_val->format('Y-m-d H:i:s'). '"
-                    GROUP BY question_id'));
+                    GROUP BY question_id, text'));
         
             $retVal = [
                 "start" => $value,
