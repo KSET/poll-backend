@@ -140,6 +140,18 @@ class PollsController extends Controller
             "Panel discussion" => "2016-5-10 17:30:00",
             "Degordian" => "2016-5-10 18:00:00",
         ];
+        
+        $answers = Answers::all();
+        $returnJson = null;
+        
+        foreach($schedule as $key => $value){
+            $retVal = [
+                "start" => $value
+                ];
+            
+            $returnJson[$key] = $retVal;
+        }
 
+        return $returnJson;
     }
 }
