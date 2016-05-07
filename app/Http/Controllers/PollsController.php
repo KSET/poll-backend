@@ -150,7 +150,7 @@ class PollsController extends Controller
             
             $retVal = [
                 "start" => $value,
-                "end" => $end_val->format('Y-m-d h:m:s');
+                "end" => $end_val->format('Y-m-d h:m:s')
                 ];
             
             $returnJson[$key] = $retVal;
