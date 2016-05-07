@@ -141,7 +141,7 @@ class PollsController extends Controller
             "Degordian" => "2016-5-10 18:00:00",
         ];
         
-        $answers = Answers::all();
+        $answers = Answer::all();
         $returnJson = null;
         
         foreach($schedule as $key => $value){
