@@ -16,8 +16,6 @@ class PollsController extends Controller
 
     public function index(Request $request)
     {
-        date_default_timezone_set('Europe/Zagreb');
-        
         $polls = DB::table('polls')->whereBetween('created_at',
             array($request->get("start_date") != null ? $request->get("start_date") : '1970-1-1 00:00:00',
                 $request->get("end_date") != null ? $request->get("end_date") : '2999-1-1 00:00:00'))->get();
