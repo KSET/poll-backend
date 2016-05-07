@@ -102,9 +102,9 @@ class PollsController extends Controller
     public function getByScheduel(){
 
         $schedule = [
-            "CS Computer Systems" => "2016-5-9 9:00:00",
-            "Montelektro" => "2016-5-9 9:30:00",
-            "Rimac" => "2016-5-9 10:00:00",
+            "CS Computer Systems" => "2016-5-7 17:00:00",
+            "Montelektro" => "2016-5-7 17:30:00",
+            "Rimac" => "2016-5-7 18:00:00",
             "Rimac #2" => "2016-5-9 10:30:00",
             "CetiTec" => "2016-5-9 11:00:00",
             "Mikroprojekt" => "2016-5-9 11:30:00",
