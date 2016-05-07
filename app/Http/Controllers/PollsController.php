@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use App\Poll;
+use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -59,7 +60,7 @@ class PollsController extends Controller
 
         $poll = new Poll;
 
-        foreach (App\Question::all() as $question){
+        foreach (Question::all() as $question){
             if(!array_key_exists($question->id, $request->answers)){
                 return response()->json(["message" => "Answer for question with id {$question->id} not given"], 400);
             }
@@ -67,7 +68,7 @@ class PollsController extends Controller
         
         $poll->save();
 
-        foreach (App\Question::all() as $question){
+        foreach (Question::all() as $question){
             $score = $request->answers[$question->id];
 
             $answer = new Answer;
