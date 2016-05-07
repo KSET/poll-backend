@@ -151,7 +151,7 @@ class PollsController extends Controller
             
              $answers = DB::raw('SELECT AVG(score), question_id
                 FROM answers
-                WHERE created_at >= ' .$value. ' AND created_at < ' .$end_val->format('Y-m-d H:i:s'). '
+                WHERE created_at >= "' .$value. '" AND created_at < "' .$end_val->format('Y-m-d H:i:s'). '"
                 GROUP BY question_id');
         
             $retVal = [
