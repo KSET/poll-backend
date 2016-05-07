@@ -149,10 +149,11 @@ class PollsController extends Controller
             $end_val = Carbon::createFromFormat('Y-m-d H:i:s', $value);
             $end_val->addMinutes(30);
             
-             $answers = DB::raw('SELECT AVG(score), question_id
-                FROM answers
-                WHERE created_at >= "' .$value. '" AND created_at < "' .$end_val->format('Y-m-d H:i:s'). '"
-                GROUP BY question_id');
+             $answers = DB::select(
+                DB::raw('SELECT AVG(score), question_id
+                    FROM answers
+                    WHERE created_at >= "' .$value. '" AND created_at < "' .$end_val->format('Y-m-d H:i:s'). '"
+                    GROUP BY question_id'));
         
             $retVal = [
                 "start" => $value,
