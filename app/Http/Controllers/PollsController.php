@@ -148,7 +148,7 @@ class PollsController extends Controller
         
         foreach($schedule as $key => $value){
             $end_val = new DateTime($value);
-            $end_val->add(new DateInterval('P30M'));
+            $end_val->add(new DateInterval('PT30M'));
             
             $retVal = [
                 "start" => $value,
