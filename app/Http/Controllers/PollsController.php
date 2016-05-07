@@ -148,7 +148,7 @@ class PollsController extends Controller
         
         foreach($schedule as $key => $value){
             $end_val = DateTime::createFromFormat('Y-m-d h:m:s', $value);
-            $end_val->add(new DateInterval('30M'));
+            $end_val->add(new DateInterval('P30M'));
             
             $retVal = [
                 "start" => $value,
