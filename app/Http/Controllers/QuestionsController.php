@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\Answers;
 use Illuminate\Http\Request;
 use Validator;
 
