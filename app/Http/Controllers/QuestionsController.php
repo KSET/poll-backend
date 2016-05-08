@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Question;
-use App\Answers;
+use App\Answer;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -82,7 +82,7 @@ class QuestionsController extends Controller
      */
     public function destroy($id)
     {
-        if (Answers::all()->where('question_id', $id)->first() != null){
+        if (Answer::all()->where('question_id', $id)->first() != null){
             return response()->json(["message" => "Question with given id has associated answers"], 400);
         }
         
