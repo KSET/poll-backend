@@ -81,6 +81,10 @@ class QuestionsController extends Controller
      */
     public function destroy($id)
     {
+        if (Answers::all()->where('question_id', $id)->first() != null){
+            return response()->json(["message" => "Question with given id has associated answers"], 400);
+        }
+        
         if (Question::destroy($id) == false){
             return response()->json(["message" => "Question with given id does not exist"], 400);
         }
